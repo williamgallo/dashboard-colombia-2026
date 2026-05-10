@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Electoral Colombia 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07070F;--s1:#0F0F1E;--s2:#16162A;--s3:#1E1E35;
+  --b:rgba(255,255,255,0.06);--b2:rgba(255,255,255,0.12);
+  --txt:#F2EFFF;--mid:#9090B0;--dim:#50507A;
+  --g:#00FFD1;--gd:#00C9A7;--gg:rgba(0,255,209,0.12);
+  --o:#FF5F1F;--og:rgba(255,95,31,0.12);
+  --v:#B44FFF;--vg:rgba(180,79,255,0.12);
+  --p:#FF3CAC;--pg:rgba(255,60,172,0.12);
+  --y:#FFD166;--yg:rgba(255,209,102,0.10);
+  --sky:#38C4FF;--skg:rgba(56,196,255,0.10);
+  --r:16px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'Outfit',sans-serif;font-size:15px;line-height:1.6;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 70% 50% at 15% 0%,rgba(0,255,209,0.05),transparent 65%),
+             radial-gradient(ellipse 60% 50% at 85% 90%,rgba(180,79,255,0.06),transparent 65%),
+             radial-gradient(ellipse 50% 40% at 55% 40%,rgba(255,95,31,0.04),transparent 65%)}
+
+/* HERO */
+.hero{position:relative;z-index:1;padding:3rem 2rem 2.5rem;border-bottom:1px solid var(--b2)}
+.hero-in{max-width:1320px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:2rem}
+.live-tag{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--g);border:1px solid rgba(0,255,209,0.25);padding:4px 14px;border-radius:20px;margin-bottom:1.2rem;background:var(--gg)}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--g);animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(0.6)}}
+.hero-title{font-size:clamp(2.4rem,5vw,3.6rem);font-weight:800;line-height:1.0;margin-bottom:.6rem;letter-spacing:-.02em}
+.line1{display:block;background:linear-gradient(90deg,#fff,var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.line2{display:block;background:linear-gradient(90deg,var(--v),var(--p));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:14px;color:var(--mid);max-width:480px;margin-bottom:1.2rem}
+.hero-chips{display:flex;flex-wrap:wrap;gap:8px}
+.hc{font-size:11px;font-family:'JetBrains Mono',monospace;padding:4px 12px;border-radius:20px;border:1px solid var(--b2);color:var(--mid);background:var(--s1)}
+.hc b{color:var(--txt)}
+.author-box{background:linear-gradient(135deg,var(--s2),var(--s3));border:1px solid var(--b2);border-radius:var(--r);padding:18px 22px;min-width:240px}
+.ab-l{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--g);margin-bottom:8px}
+.ab-n{font-size:15px;font-weight:700}
+.ab-r{font-size:12px;color:var(--mid);margin-top:2px}
+.ab-d{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim);margin-top:10px;padding-top:10px;border-top:1px solid var(--b)}
+
+/* POLLS */
+.polls{position:relative;z-index:1;padding:2rem;background:var(--s1);border-bottom:1px solid var(--b2)}
+.polls-in{max-width:1320px;margin:0 auto}
+.stitle{display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.5rem}
+.stitle::after{content:'';flex:1;height:1px}
+.st-o{color:var(--o)}.st-o::after{background:linear-gradient(90deg,rgba(255,95,31,.4),transparent)}
+.st-v{color:var(--v)}.st-v::after{background:linear-gradient(90deg,rgba(180,79,255,.4),transparent)}
+.st-g{color:var(--g)}.st-g::after{background:linear-gradient(90deg,rgba(0,255,209,.4),transparent)}
+.poll-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+.pc{background:var(--s2);border:1px solid var(--b);border-radius:var(--r);padding:16px;transition:all .25s;position:relative;overflow:hidden}
+.pc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:3px 3px 0 0}
+.pc:hover{border-color:var(--b2);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.4)}
+.pc-nm{font-size:13px;font-weight:600;margin-bottom:2px}
+.pc-py{font-size:10px;color:var(--dim);margin-bottom:12px;font-family:'JetBrains Mono',monospace}
+.pc-pct{font-family:'JetBrains Mono',monospace;font-size:30px;font-weight:700;line-height:1;margin-bottom:10px}
+.pc-track{background:rgba(255,255,255,0.07);border-radius:4px;height:5px;overflow:hidden}
+.pc-fill{height:100%;border-radius:4px;transition:width 1.4s cubic-bezier(.4,0,.2,1)}
+.pc-label{font-size:10px;color:var(--mid);margin-top:8px;font-family:'JetBrains Mono',monospace}
+.poll-note{font-size:10px;color:var(--dim);margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--b);line-height:1.8;font-family:'JetBrains Mono',monospace}
+
+/* STICKY NAV */
+.nav{position:sticky;top:0;z-index:200;background:rgba(7,7,15,0.94);backdrop-filter:blur(20px);border-bottom:1px solid var(--b2);padding:.6rem 2rem}
+.nav-in{max-width:1320px;margin:0 auto;display:flex;flex-wrap:nowrap;gap:6px;align-items:center;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+.nav-in::-webkit-scrollbar{display:none}
+.nav-sep{width:1px;height:24px;background:var(--b2);margin:0 2px;flex-shrink:0}
+.pill{font-size:11px;font-weight:500;padding:5px 12px;border-radius:20px;border:1px solid var(--b2);background:transparent;color:var(--mid);cursor:pointer;transition:all .18s;font-family:'Outfit',sans-serif;white-space:nowrap;flex-shrink:0}
+.pill:hover{color:var(--txt);border-color:rgba(255,255,255,.2)}
+.pill.on-t{background:var(--vg);border-color:var(--v);color:var(--v);font-weight:600}
+.pill.on-i{background:var(--gg);border-color:var(--g);color:var(--g);font-weight:600}
+.search-wrap{margin-left:auto;position:relative;flex-shrink:0}
+.srch{background:var(--s2);border:1px solid var(--b2);border-radius:20px;padding:5px 14px 5px 32px;font-size:12px;color:var(--txt);font-family:'Outfit',sans-serif;width:160px;outline:none;transition:all .2s}
+.srch:focus{border-color:var(--g);box-shadow:0 0 0 3px var(--gg)}
+.srch-ic{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--dim);font-size:15px;pointer-events:none}
+.count-badge{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--g);padding:4px 10px;border:1px solid rgba(0,255,209,.2);border-radius:20px;background:var(--gg);flex-shrink:0;white-space:nowrap}
+
+/* MAIN */
+.main{position:relative;z-index:1;max-width:1320px;margin:0 auto;padding:2rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px}
+
+/* CARD */
+.card{background:var(--s1);border:1px solid var(--b);border-radius:var(--r);overflow:hidden;transition:all .3s cubic-bezier(.4,0,.2,1);position:relative;cursor:pointer}
+.card:hover{transform:translateY(-5px);border-color:var(--b2);box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.card.hidden{display:none}
+.card.selected{border-color:var(--g);box-shadow:0 0 0 2px rgba(0,255,209,.2)}
+.card-accent{height:4px;width:100%}
+
+/* CARD HEADER */
+.ch{padding:16px;border-bottom:1px solid var(--b);display:flex;gap:14px;align-items:flex-start;background:var(--s2)}
+.photo-wrap{position:relative;flex-shrink:0}
+.photo{width:66px;height:66px;border-radius:50%;object-fit:cover;display:block;border:2px solid var(--b2);background:var(--s3)}
+.photo-fb{width:66px;height:66px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;flex-shrink:0;border:2px solid var(--b2)}
+.num-badge{position:absolute;bottom:-3px;right:-3px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;padding:2px 6px;border-radius:8px;background:var(--s3);border:1.5px solid var(--b2);color:var(--mid)}
+.cm{flex:1;min-width:0}
+.cname{font-size:16px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
+.cparty{font-size:11px;color:var(--dim);margin-bottom:8px;font-family:'JetBrains Mono',monospace}
+.badges{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:6px}
+.badge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:10px;font-family:'JetBrains Mono',monospace}
+.badge-left{background:rgba(0,255,209,.1);color:var(--g);border:1px solid rgba(0,255,209,.25)}
+.badge-cl{background:rgba(0,255,209,.07);color:#66FFDF;border:1px solid rgba(0,255,209,.18)}
+.badge-centro{background:var(--skg);color:var(--sky);border:1px solid rgba(56,196,255,.25)}
+.badge-cd{background:var(--skg);color:#78D8FF;border:1px solid rgba(56,196,255,.18)}
+.badge-der{background:var(--og);color:var(--o);border:1px solid rgba(255,95,31,.25)}
+.badge-ind{background:var(--vg);color:var(--v);border:1px solid rgba(180,79,255,.25)}
+.badge-pct{background:var(--yg);color:var(--y);border:1px solid rgba(255,209,102,.2)}
+.pct-num{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;margin-top:4px;line-height:1}
+
+/* TERRITORY */
+.terr{padding:10px 16px;border-bottom:1px solid var(--b);display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.015)}
+.terr-lbl{font-size:11px;color:var(--mid);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.terr-bar{width:90px;background:rgba(255,255,255,.06);border-radius:3px;height:4px;overflow:hidden;flex-shrink:0}
+.terr-fill{height:100%;border-radius:3px}
+
+/* CARD TABS */
+.ctabs{display:flex;border-bottom:1px solid var(--b);overflow-x:auto;scrollbar-width:none;background:var(--s2)}
+.ctabs::-webkit-scrollbar{display:none}
+.ctab{font-size:10px;font-weight:700;font-family:'JetBrains Mono',monospace;padding:9px 13px;color:var(--dim);cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .15s;letter-spacing:.05em;text-transform:uppercase;background:none;border-left:none;border-right:none;border-top:none}
+.ctab:hover{color:var(--mid)}
+.ctab.on{color:var(--txt);border-bottom-color:currentColor}
+
+/* CARD BODY */
+.cb{padding:14px 16px}
+.prop-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--y);margin-bottom:6px}
+.prop-txt{font-size:12.5px;color:var(--mid);line-height:1.7;margin-bottom:12px}
+.pc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pcb{padding:10px;border-radius:10px}
+.pro{background:rgba(0,255,209,.05);border:1px solid rgba(0,255,209,.15)}
+.con{background:rgba(255,95,31,.05);border:1px solid rgba(255,95,31,.15)}
+.pclbl{font-size:10px;font-weight:700;font-family:'JetBrains Mono',monospace;margin-bottom:4px}
+.pclbl-p{color:var(--g)}.pclbl-c{color:var(--o)}
+.pctxt{font-size:11px;line-height:1.55}
+.pctxt-p{color:#7FFFD4}.pctxt-c{color:#FFA07A}
+.photo-src{font-size:9px;color:var(--dim);margin-top:10px;padding-top:8px;border-top:1px solid var(--b);font-family:'JetBrains Mono',monospace}
+
+/* COMPARE BAR */
+.cmpbar{position:fixed;bottom:0;left:0;right:0;z-index:300;background:rgba(15,15,30,.97);border-top:1px solid var(--b2);padding:14px 2rem;backdrop-filter:blur(20px);display:none;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.cmpbar.vis{display:flex}
+.cmp-slots{display:flex;gap:8px;align-items:center}
+.cmp-slot{font-size:12px;font-family:'JetBrains Mono',monospace;padding:6px 14px;border-radius:20px;border:1px dashed var(--b2);color:var(--dim)}
+.cmp-slot.full{border-style:solid;border-color:var(--g);color:var(--g);background:var(--gg)}
+.cmp-hint{font-size:11px;color:var(--dim);font-family:'JetBrains Mono',monospace}
+.cmp-btn{font-size:13px;font-weight:700;padding:9px 22px;border-radius:20px;border:none;background:linear-gradient(135deg,var(--g),var(--v));color:#000;cursor:pointer;font-family:'Outfit',sans-serif}
+.cmp-btn:disabled{opacity:.35;cursor:not-allowed}
+.cmp-clear{font-size:12px;color:var(--mid);cursor:pointer;padding:7px 14px;border-radius:20px;border:1px solid var(--b2);background:none;color:var(--mid);font-family:'Outfit',sans-serif}
+
+/* COMPARE MODAL */
+.modal-bg{display:none;position:fixed;inset:0;z-index:400;background:rgba(0,0,0,.8);backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:2rem}
+.modal-bg.vis{display:flex}
+.modal{background:var(--s1);border:1px solid var(--b2);border-radius:var(--r);max-width:860px;width:100%;max-height:90vh;overflow-y:auto;padding:2rem;position:relative}
+.modal-close{position:absolute;top:16px;right:16px;font-size:20px;cursor:pointer;color:var(--mid);background:none;border:none;font-family:'Outfit',sans-serif;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--b2)}
+.modal-close:hover{color:var(--txt)}
+.modal-title{font-size:18px;font-weight:700;margin-bottom:1.5rem;color:var(--txt)}
+.cmp-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.cmp-col{}
+.cmp-col-head{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--b2)}
+.cmp-col-photo{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--b2)}
+.cmp-col-pfb{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px}
+.cmp-col-name{font-size:15px;font-weight:700}
+.cmp-col-party{font-size:11px;color:var(--dim);font-family:'JetBrains Mono',monospace}
+.cmp-section{margin-bottom:14px}
+.cmp-section-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--y);margin-bottom:6px}
+.cmp-section-txt{font-size:12px;color:var(--mid);line-height:1.65}
+.cmp-section-pro{font-size:11px;color:#7FFFD4;margin-top:4px}
+.cmp-section-con{font-size:11px;color:#FFA07A;margin-top:4px}
+
+/* SOURCES */
+.sources{position:relative;z-index:1;max-width:1320px;margin:0 auto;padding:0 2rem 2rem}
+.src-box{background:var(--s1);border:1px solid var(--b);border-radius:var(--r);padding:1.5rem 2rem;margin-top:2rem}
+.src-title{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--g);margin-bottom:1rem;padding-bottom:.75rem;border-bottom:1px solid var(--b2)}
+.src-list{list-style:none}
+.src-list li{font-size:11.5px;color:var(--mid);padding:7px 0;border-bottom:1px solid var(--b);line-height:1.65;font-family:'JetBrains Mono',monospace}
+.src-list li:last-child{border-bottom:none}
+.src-list a{color:var(--g);text-decoration:none}
+.src-list a:hover{text-decoration:underline}
+.src-list b{color:var(--txt)}
+.footer{font-size:11px;color:var(--dim);text-align:center;padding:1.5rem 2rem;font-family:'JetBrains Mono',monospace;line-height:1.8}
+.footer b{color:var(--mid)}
+@media(max-width:640px){.hero-in,.nav-in{flex-direction:column}.cmp-grid{grid-template-columns:1fr}.pc-grid{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.modal{padding:1.2rem}.srch{width:160px}}
+
+/* SPECTRUM */
+.spectrum-wrap{position:relative;z-index:1;background:var(--s1);border-top:1px solid var(--b2);padding:2rem}
+.spectrum-inner{max-width:1320px;margin:0 auto}
+.spectrum-note{font-size:11px;color:var(--dim);margin-bottom:1.5rem;font-family:'JetBrains Mono',monospace;line-height:1.6;padding:10px 14px;background:var(--s2);border-radius:10px;border:1px solid var(--b)}
+.spectrum-container{}
+.axis-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.axis-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.axis-label.center{color:var(--mid)}
+.spectrum-chart{position:relative;background:linear-gradient(90deg,rgba(0,255,209,.04) 0%,rgba(56,196,255,.04) 50%,rgba(255,95,31,.04) 100%);border:1px solid var(--b);border-radius:16px;height:180px;margin-bottom:1rem;overflow:visible}
+.spectrum-chart::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(255,255,255,.08)}
+.cand-bubble{position:absolute;transform:translate(-50%,-50%);cursor:pointer;transition:all .25s}
+.cand-bubble:hover .bubble-circle{transform:scale(1.15)}
+.cand-bubble:hover .bubble-label{opacity:1}
+.bubble-circle{border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;font-family:'JetBrains Mono',monospace;transition:transform .25s;border:2px solid rgba(255,255,255,.2)}
+.bubble-label{position:absolute;top:calc(100% + 6px);left:50%;transform:translateX(-50%);font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--txt);white-space:nowrap;text-align:center;pointer-events:none;background:rgba(7,7,15,.9);padding:3px 7px;border-radius:6px;border:1px solid var(--b2)}
+.spectrum-legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:.5rem}
+.leg-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--mid);font-family:'JetBrains Mono',monospace}
+.leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.radar-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.radar-card{background:var(--s2);border:1px solid var(--b);border-radius:var(--r);padding:14px 16px;overflow:hidden;min-width:0}
+.radar-name{font-size:13px;font-weight:700;margin-bottom:12px}
+.radar-bars{}
+.rbar-row{display:grid;grid-template-columns:80px 1fr 58px;align-items:center;gap:8px;margin-bottom:7px}
+.rbar-lbl{font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--mid);text-align:right;white-space:nowrap}
+.rbar-track{background:rgba(255,255,255,.06);border-radius:3px;height:5px;overflow:hidden;min-width:0}
+.rbar-fill{height:100%;border-radius:3px;transition:width 1s ease}
+.rbar-val{font-size:10px;font-family:'JetBrains Mono',monospace;text-align:left;white-space:nowrap;padding-left:2px}
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+<div class="hero-in">
+  <div>
+    <div class="live-tag"><span class="live-dot"></span>Análisis Electoral en Vivo · Colombia 2026</div>
+    <div class="hero-title"><span class="line1">Dashboard Presidencial</span><span class="line2">Colombia 2026</span></div>
+    <div class="hero-sub">12 candidatos activos · Primera vuelta: 31 mayo 2026 · Segunda vuelta (si aplica): 21 junio 2026</div>
+    <div class="hero-chips">
+      <span class="hc"><b>Fuente:</b> Encuestadoras certificadas CNE</span>
+      <span class="hc"><b>Datos:</b> Programas de gobierno oficiales</span>
+      <span class="hc"><b>Fecha:</b> 9 mayo 2026</span>
+    </div>
+  </div>
+  <div class="author-box">
+    <div class="ab-l">Elaborado por</div>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+      <img src="https://pbs.twimg.com/profile_images/1618768538679869441/PMH5L_mR_400x400.jpg"
+           alt="William Ferney Gallo Numpaque"
+           style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid rgba(0,255,209,0.35);flex-shrink:0"
+           onerror="this.style.display='none'">
+      <div>
+        <div class="ab-n">William Ferney Gallo Numpaque</div>
+        <div class="ab-r">Experto en asuntos políticos y legislativos</div>
+      </div>
+    </div>
+    <div class="ab-d">COLOMBIA · MAYO 9 · 2026 · @WILLYGALLO</div>
+  </div>
+</div>
+</div>
+
+<!-- POLLS -->
+<div class="polls">
+<div class="polls-in">
+  <div class="stitle st-o">Tendencia de voto — Primera vuelta · Mayo 2026</div>
+  <div class="poll-grid" id="poll-grid"></div>
+  <div class="poll-note">
+    Fuente principal: Invamer SAS para Noticias Caracol y Blu Radio, 15–24 abr 2026 (n=3.800, ±1,89%, 95%, ISO 20252:2019).<br>
+    Complementado: CNC/Cambio 23–30 abr 2026 (n=2.157, ±3,0%) · Guarumo/EcoAnalítica para El Tiempo, 30 abr 2026.<br>
+    Encuestadoras registradas ante el Consejo Nacional Electoral conforme Ley 2494 de 2025.
+  </div>
+</div>
+</div>
+
+<!-- NAV -->
+<div class="nav">
+<div class="nav-in">
+  <div class="pill on-t" data-topic="seg" onclick="setTopic(this)">Seguridad</div>
+  <div class="pill" data-topic="eco" onclick="setTopic(this)">Economía</div>
+  <div class="pill" data-topic="sal" onclick="setTopic(this)">Salud</div>
+  <div class="pill" data-topic="edu" onclick="setTopic(this)">Educación</div>
+  <div class="pill" data-topic="amb" onclick="setTopic(this)">Energía</div>
+  <div class="pill" data-topic="ins" onclick="setTopic(this)">Institucional</div>
+  <div class="pill" data-topic="cam" onclick="setTopic(this)">Campo</div>
+  <div class="pill" data-topic="gen" onclick="setTopic(this)">Género y Mujeres</div>
+  <div class="pill" data-topic="jov" onclick="setTopic(this)">Jóvenes</div>
+  <div class="pill" data-topic="paz" onclick="setTopic(this)">Paz y Conflicto</div>
+  <div class="nav-sep"></div>
+  <div class="pill on-i" data-ideo="all" onclick="setIdeo(this)">Todos</div>
+  <div class="pill" data-ideo="izq" onclick="setIdeo(this)">Izquierda</div>
+  <div class="pill" data-ideo="cen" onclick="setIdeo(this)">Centro</div>
+  <div class="pill" data-ideo="der" onclick="setIdeo(this)">Derecha</div>
+  <div class="nav-sep"></div>
+  <div class="search-wrap">
+    <span class="srch-ic">🔍</span>
+    <input class="srch" id="srch" placeholder="Buscar candidato..." oninput="filterSearch(this.value)">
+  </div>
+  <span class="count-badge" id="cnt">12 candidatos</span>
+</div>
+</div>
+
+<!-- MAIN GRID -->
+<div class="main">
+  <div class="grid" id="main-grid"></div>
+</div>
+
+
+<!-- POLITICAL SPECTRUM MAP -->
+<div class="spectrum-wrap">
+<div class="spectrum-inner">
+  <div class="stitle st-v" style="margin-bottom:1.5rem">Mapa de correlación de fuerzas políticas · Elecciones 2026</div>
+  <div class="spectrum-note">Posicionamiento según programa de gobierno, declaraciones públicas verificadas y análisis de LLYC, International Crisis Group y Razón Pública. No representa afiliación oficial.</div>
+  <div class="spectrum-container">
+    <!-- Axis labels -->
+    <div class="axis-bar">
+      <div class="axis-label left">◀ IZQUIERDA</div>
+      <div class="axis-label center">CENTRO</div>
+      <div class="axis-label right">DERECHA ▶</div>
+    </div>
+    <!-- Spectrum chart -->
+    <div class="spectrum-chart" id="spectrum-chart"></div>
+    <!-- Legend -->
+    <div class="spectrum-legend">
+      <div class="leg-item"><span class="leg-dot" style="background:#00FFD1"></span>Izquierda / Centro-izquierda</div>
+      <div class="leg-item"><span class="leg-dot" style="background:#38C4FF"></span>Centro</div>
+      <div class="leg-item"><span class="leg-dot" style="background:#FF5F1F"></span>Centro-derecha / Derecha</div>
+      <div class="leg-item"><span class="leg-dot" style="background:#B44FFF"></span>Independiente</div>
+      <div class="leg-item"><span class="leg-dot" style="background:var(--y)"></span>El círculo indica % en encuestas</div>
+    </div>
+    <!-- Topic radar for top 4 -->
+    <div class="stitle st-g" style="margin-top:2rem;margin-bottom:1rem">Mapa temático — Cobertura programática de los 4 candidatos punteros</div>
+    <div class="radar-grid" id="radar-grid"></div>
+  </div>
+</div>
+</div>
+
+<!-- SOURCES -->
+<div class="sources">
+<div class="src-box">
+  <div class="src-title">Referencias, fuentes y créditos</div>
+  <ul class="src-list">
+    <li><b>Encuestas:</b> Invamer SAS / Noticias Caracol / Blu Radio (15–24 abr 2026, n=3.800, ±1,89%, 95%, ISO 20252:2019, Ley 2494/2025) · CNC / Revista Cambio (23–30 abr 2026, n=2.157, ±3,0%) · Guarumo / EcoAnalítica / El Tiempo (30 abr 2026)</li>
+    <li><b>Programas de gobierno:</b> Cepeda — "El Poder de la Verdad" <a href="https://www.movimientopactohistorico.co/docs/programa-gobierno-2026-2030.pdf" target="_blank">movimientopactohistorico.co</a> · Valencia — "Colombia Más Grande" <a href="https://palomapresidente.com.co" target="_blank">palomapresidente.com.co</a> · Macollins <a href="https://sondracono.com" target="_blank">sondracono.com</a> · Fajardo <a href="https://www.sergiofajardo.com/propuestas" target="_blank">sergiofajardo.com</a></li>
+    <li><b>Registraduría Nacional:</b> Tarjetón oficial · <a href="https://www.registraduria.gov.co" target="_blank">registraduria.gov.co</a></li>
+    <li><b>Perfiles:</b> PARES <a href="https://www.pares.com.co/elecciones-colombia-2026/" target="_blank">pares.com.co</a> · Congreso Visible – Uniandes <a href="https://congresovisible.uniandes.edu.co" target="_blank">congresovisible.uniandes.edu.co</a> · Wikipedia <a href="https://es.wikipedia.org/wiki/Elecciones_presidenciales_de_Colombia_de_2026" target="_blank">es.wikipedia.org</a></li>
+    <li><b>Medios consultados:</b> El Espectador · El Tiempo · Infobae Colombia · RCN Radio · Portafolio · El País Cali · Revista Cambio · La Silla Vacía · Noticias Caracol · El Colombiano · Vanguardia</li>
+    <li><b>Créditos fotográficos:</b> Iván Cepeda y Paloma Valencia: Congreso Visible – Uniandes (congresovisible.uniandes.edu.co) · Claudia López: Alcaldía de Bogotá · Santiago Botero: Portafolio · A. de la Espriella: ColombiaCheck · M. Lizcano: El País Cali · M. Uribe Londoño: Centro Democrático · Sondra Macollins: Occidente.co · Roy Barreras: Congreso Visible – Uniandes · Carlos Caicedo: El Espectador · G. Matamoros: El Frente · Sergio Fajardo: The New York Times</li>
+    <li><b>Fuente temática Jóvenes:</b> El Tiempo — "Las propuestas que los candidatos presidenciales les hacen a los jóvenes de Colombia" (mayo 2026) · Revista Cambio — "Jóvenes, propuestas de Cepeda, Valencia y Espriella" (abril 2026) · El Espectador (abril 2026) · cwmas.com.co — Encuentro Nacional de Jóvenes, Cali, 2 mayo 2026.</li>
+    <li><b>Fuente temática Paz y Conflicto:</b> International Crisis Group — "Colombia's Polls Mark a Forking Path for Peace Talks" (marzo 2026) · El Tiempo — Debate "Antioquia vota por Colombia" (mayo 2026) · RCN Radio · El Espectador · El Colombiano.</li>
+    <li><b>Fuente temática Género y Mujeres:</b> Razón Pública — "La agenda de género en la contienda presidencial colombiana de 2026" (mayo 2026) · El Tiempo — "Debate de Vicepresidentxs por las Mujeres" (mayo 2026) · Fundaciones Dos Latinas y Nerds de la Historia.</li>
+    <li><b>Nota legal:</b> Contenido de elaboración propia con fines informativos y académicos. Parafraseo original basado en fuentes públicas verificables. Fotografías referenciadas con fines informativos no comerciales conforme art. 32, Ley 23 de 1982 de Colombia.</li>
+  </ul>
+</div>
+<div class="footer"><b>Dashboard Electoral Colombia 2026</b> · William Ferney Gallo Numpaque — Experto en asuntos políticos y legislativos · 9 de mayo de 2026<br>Todos los datos son públicos y verificables · Para compartir con fines informativos y académicos</div>
+</div>
+
+<!-- COMPARE BAR -->
+<div class="cmpbar" id="cmpbar">
+  <div>
+    <div class="cmp-hint">MODO COMPARACIÓN</div>
+    <div class="cmp-slots" id="cmp-slots">
+      <div class="cmp-slot" id="slot0">Candidato 1</div>
+      <div style="color:var(--dim);font-family:'JetBrains Mono',monospace;font-size:14px">vs</div>
+      <div class="cmp-slot" id="slot1">Candidato 2</div>
+    </div>
+  </div>
+  <div style="display:flex;gap:8px;align-items:center">
+    <button class="cmp-clear" onclick="clearCompare()">Limpiar</button>
+    <button class="cmp-btn" id="cmp-btn" onclick="openCompare()" disabled>Comparar →</button>
+  </div>
+</div>
+
+<!-- COMPARE MODAL -->
+<div class="modal-bg" id="modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeCompare()">✕</button>
+    <div class="modal-title" id="modal-title">Comparando candidatos</div>
+    <div class="cmp-grid" id="cmp-grid"></div>
+  </div>
+</div>
+
+<script>
+const POLLS = [
+  {name:"Iván Cepeda",party:"Pacto Histórico",pct:44.3,color:"#00FFD1",label:"Líder encuestas"},
+  {name:"A. de la Espriella",party:"Defensores de la Patria",pct:21.5,color:"#FF5F1F",label:"2° lugar"},
+  {name:"Paloma Valencia",party:"Centro Democrático",pct:19.8,color:"#B44FFF",label:"3° lugar"},
+  {name:"Claudia López",party:"Con Claudia Imparables",pct:3.6,color:"#38C4FF",label:"4° lugar"},
+  {name:"Sergio Fajardo",party:"Dignidad y Compromiso",pct:2.5,color:"#9090B0",label:"5° lugar"},
+  {name:"Voto en blanco",party:"—",pct:4.8,color:"#50507A",label:""},
+  {name:"Resto candidatos",party:"Otros (≤1,4% c/u)",pct:3.5,color:"#30305A",label:""}
+];
+
+
+const GEN = {"1": {"p": "Enfoque estructural y transformador: vincula la desigualdad de género al modelo económico y al patriarcado. Propone redistribuir el trabajo de cuidado no remunerado, garantizar paridad en cargos públicos y reconocer a las mujeres como sujetos económicos y políticos, no solo como víctimas.", "pro": "Es el programa con la agenda de género más amplia y estructural, según análisis de Razón Pública (mayo 2026). Integra género en su 'revolución económica y social'.", "con": "Razón Pública señala que pese al discurso amplio, las propuestas concretas de género son solo 3 en su programa de 433 páginas. Débil en participación de mujeres en liderazgos económicos."}, "3": {"p": "Sistema Nacional del Cuidado como eje central. Propone garantizar independencia económica de las mujeres rurales, combatir la violencia política de género y aumentar la participación femenina en órganos de decisión. Ha hecho de los derechos de las mujeres un eje de toda su carrera política.", "pro": "Candidata con mayor trayectoria comprobada en defensa de derechos de las mujeres. Su fórmula Leonardo Huerta participó en el Debate de Vicepresidentxs por las Mujeres (El Tiempo, mayo 2026) con propuestas concretas.", "con": "No detalla cómo financiará el Sistema Nacional del Cuidado. Bajo respaldo electoral (3,6%) limita su capacidad de implementar esta agenda."}, "4": {"p": "Sin propuestas estructuradas sobre género o mujeres publicadas y verificadas a la fecha.", "pro": "N/A — sin propuestas verificadas.", "con": "Ausencia total de agenda de género en candidato que aspira a la presidencia de un país con alta violencia basada en género."}, "5": {"p": "Prácticamente carece de una agenda específica para las mujeres, según el análisis de Razón Pública (mayo 2026). Las mujeres aparecen en su programa dentro de agendas de seguridad y familia, sin abordar la desigualdad estructural.", "pro": "N/A — no hay propuestas verificadas de género en su programa.", "con": "Es el candidato con la agenda de género más débil del espectro, según Razón Pública. No aborda la desigualdad como problema estructural."}, "6": {"p": "Sin propuestas estructuradas sobre género o mujeres publicadas y verificadas a la fecha.", "pro": "N/A — sin propuestas verificadas.", "con": "Ausencia de agenda de género en candidato que promete modernizar el Estado colombiano."}, "7": {"p": "Sin propuestas estructuradas sobre género o mujeres publicadas y verificadas a la fecha.", "pro": "N/A — sin propuestas verificadas.", "con": "Ausencia de agenda de género en su programa publicado."}, "8": {"p": "Reivindica el liderazgo femenino como eje central de su candidatura: 'Los hombres han gobernado 200 años, ahora es nuestro turno'. Propone brigadas de mujeres para protección comunitaria y se presenta como la primera candidata presidencial real con posibilidades de ganar.", "pro": "Su sola candidatura rompe barreras históricas. Es la única mujer activa en el tarjetón que reivindica explícitamente el género como bandera política.", "con": "El discurso de género no está acompañado de propuestas concretas de política pública verificadas más allá del simbolismo de su candidatura."}, "9": {"p": "Propone implementar los puntos del Acuerdo de Paz relacionados con género, incluyendo el enfoque diferencial para mujeres víctimas del conflicto. Su fórmula Martha Lucía Zamora tiene experiencia jurídica relevante en derechos de las mujeres.", "pro": "El Acuerdo de Paz incluye un enfoque de género pionero en América Latina que ya tiene marco jurídico existente.", "con": "Sin propuestas propias más allá de implementar el Acuerdo. 0,1% en encuestas limita su capacidad de implementar esta agenda."}, "10": {"p": "Sin propuestas estructuradas sobre género o mujeres publicadas y verificadas a la fecha.", "pro": "N/A — sin propuestas verificadas.", "con": "Ausencia de agenda de género en candidato regional con alta popularidad en su territorio."}, "11": {"p": "Sin propuestas estructuradas sobre género o mujeres publicadas y verificadas a la fecha.", "pro": "N/A — sin propuestas verificadas.", "con": "Ausencia total de agenda de género en candidato con perfil militar."}, "12": {"p": "Visión normativa que prioriza restricción de derechos reproductivos, según análisis de Razón Pública (mayo 2026). Las mujeres aparecen como víctimas o personas económicamente vulnerables. Su fórmula Juan Daniel Oviedo participó en el Debate de Vicepresidentxs por las Mujeres comprometiéndose con un sistema nacional del cuidado y acceso a predios rurales para mujeres.", "pro": "Su fórmula Oviedo mostró propuestas concretas en el debate de vicepresidentas: acceso a tierra para mujeres rurales y sistema del cuidado (El Tiempo, mayo 2026).", "con": "Razón Pública señala que su enfoque reafirma un orden social determinado sin abordar la desigualdad estructural. Posición restrictiva frente a derechos reproductivos."}, "13": {"p": "Incluye un sistema nacional de cuidado dentro de un diseño institucional más amplio, con medidas de empleo, educación y acceso a activos productivos. Su fórmula Edna Bonilla participó activamente en el Debate de Vicepresidentxs por las Mujeres defendiendo la transversalidad de género en políticas rurales y la participación femenina en órganos de decisión.", "pro": "Agenda de género integrada en arquitectura institucional más amplia. Edna Bonilla es la fórmula con propuestas de género más detalladas en el debate de vicepresidentas (El Tiempo, mayo 2026).", "con": "El programa general de Fajardo es menos disruptivo en género que el de Cepeda y menos operativo que el de López, según Razón Pública (mayo 2026)."}};
+
+const JOV = {"1": {"p": "Ampliar la participación política juvenil en los procesos de decisión. Educación superior gratuita y territorializada. Fondo Juvenil Agropecuario para que jóvenes rurales lideren proyectos productivos. Formación en liderazgo comunitario. Presentó estas propuestas en el Encuentro Nacional de Jóvenes en Cali, 2 de mayo de 2026.", "pro": "Propuesta de educación superior gratuita tiene impacto directo en la principal preocupación de los jóvenes: el acceso universitario. El Fondo Juvenil Agropecuario es propuesta concreta y verificada.", "con": "Las preocupaciones principales de los jóvenes son salud, inseguridad y empleo (El Tiempo, mayo 2026). Cepeda centra su propuesta juvenil más en participación política que en inserción laboral inmediata."}, "3": {"p": "Conectividad digital en municipios alejados como herramienta de oportunidad para jóvenes. Educación media articulada con el sector productivo. Énfasis en primera infancia como inversión en la generación futura. Sin propuesta juvenil específica verificada más allá de su agenda educativa general.", "pro": "La conectividad digital tiene impacto directo en las oportunidades de los jóvenes rurales y urbanos.", "con": "No tiene una agenda juvenil diferenciada y verificada. Sus propuestas de juventud se diluyen en su agenda educativa general."}, "4": {"p": "Sin propuestas estructuradas sobre juventud publicadas y verificadas a la fecha.", "pro": "N/A — sin propuestas verificadas.", "con": "Ausencia total de agenda juvenil en candidato que se presenta como opción de ruptura con el sistema."}, "5": {"p": "Reformar el sistema educativo para hacerlo más internacional y conectado a sectores productivos. Créditos blandos y programa de méritos para acceso universitario. Escuela de emprendedores rurales para capacitar 100.000 jóvenes. Régimen especial para primer empleo juvenil con incentivos fiscales a empresas. Pasantías pagas obligatorias en el sector privado. Centros de innovación y empleo del Siglo XXI.", "pro": "Es el candidato con la propuesta juvenil más detallada y concreta en materia de empleo y emprendimiento, según El Espectador (abril 2026). El régimen especial para primer empleo es una propuesta verificada y específica.", "con": "Los créditos para educación superior han generado debate sobre endeudamiento estudiantil. La 'escuela de emprendedores' requiere presupuesto que no está detallado."}, "6": {"p": "Digitalización del Estado como generador de oportunidades para jóvenes en el sector tecnológico. Economía digital como motor de empleo juvenil. Sin propuesta juvenil estructurada publicada más allá de su agenda TIC.", "pro": "El sector TIC es uno de los de mayor crecimiento en empleo juvenil en Colombia.", "con": "Sin propuesta específica y verificada para jóvenes más allá de su agenda digital general."}, "7": {"p": "Sin propuestas estructuradas sobre juventud publicadas y verificadas a la fecha.", "pro": "N/A — sin propuestas verificadas.", "con": "Ausencia de agenda juvenil en candidato que aspira a la presidencia."}, "8": {"p": "Sin propuestas estructuradas sobre juventud publicadas y verificadas a la fecha.", "pro": "N/A — sin propuestas verificadas.", "con": "Ausencia de agenda juvenil específica más allá de su propuesta general de modernización del Estado."}, "9": {"p": "Educación pública fortalecida con ciencia y tecnología para el desarrollo rural. Implementación del Acuerdo de Paz como mecanismo para proteger a los jóvenes del reclutamiento forzado en zonas de conflicto.", "pro": "El Acuerdo de Paz incluye mecanismos específicos de protección de jóvenes frente al reclutamiento, con marco jurídico existente.", "con": "Sin propuesta propia de empleo o emprendimiento juvenil verificada más allá del marco del Acuerdo de Paz."}, "10": {"p": "Inversión en territorios costeros y marginados como base del desarrollo juvenil regional. Sin propuesta juvenil diferenciada publicada a la fecha.", "pro": "N/A — sin propuestas específicas verificadas.", "con": "Sin agenda juvenil diferenciada en candidato con experiencia territorial."}, "11": {"p": "Sin propuestas estructuradas sobre juventud publicadas y verificadas a la fecha.", "pro": "N/A — sin propuestas verificadas.", "con": "Total ausencia de agenda juvenil verificable."}, "12": {"p": "Programa nacional de inglés desde preescolar y alianzas con universidades internacionales. Subsidios focalizados para jóvenes de estratos bajos. Emprendimiento juvenil vinculado a zonas francas regionales. Acceso a predios rurales para mujeres y jóvenes rurales (propuesta de su fórmula Oviedo en el Debate de Vicepresidentas).", "pro": "El bilingüismo desde preescolar es una apuesta de largo plazo con impacto directo en la empleabilidad juvenil. Juan Daniel Oviedo tiene credenciales técnicas (ex-DANE) para diseñar políticas basadas en evidencia.", "con": "Las principales preocupaciones de los jóvenes son salud, inseguridad y falta de empleo inmediato. El bilingüismo es una propuesta de impacto a largo plazo, no de corto plazo."}, "13": {"p": "Economía naranja e industrias creativas como motor de empleo para jóvenes creativos y emprendedores. Capital semilla estatal para startups y emprendimiento juvenil. Triplicar inversión en educación pública. Parques educativos y mega-bibliotecas como espacios de oportunidad para jóvenes en municipios vulnerables.", "pro": "La economía naranja tiene alto potencial para jóvenes creativos. Su modelo probado en Medellín (parques educativos, bibliotecas) tiene evidencia real de impacto en jóvenes vulnerables.", "con": "Economía naranja no resuelve el desempleo masivo de jóvenes en sectores tradicionales. Ya fue candidato en 2018 y 2022 con propuestas similares."}};
+
+const PAZ = {"1": {"p": "Continuar y profundizar la Paz Total del gobierno Petro. Redoblar esfuerzos en negociaciones con grupos armados a pesar de los contradictorios resultados. Convocar un diálogo nacional como primera medida de gobierno. Desarrollo territorial en zonas de conflicto con garantías de verdad, justicia y reparación. Facilitador histórico de los acuerdos con FARC y ELN.", "pro": "Es el candidato con mayor experiencia directa en procesos de paz: facilitó los acuerdos con FARC (2012) y ELN (2015). El International Crisis Group (marzo 2026) señala que su enfoque es el más comprometido con la negociación.", "con": "La Paz Total del gobierno Petro no ha producido resultados verificables en reducción de violencia. International Crisis Group advierte sobre los contradictorios resultados de esta política hasta la fecha."}, "3": {"p": "No continuaría con los diálogos de la paz total sin un cese real de actividades criminales. Rechaza que grupos armados controlen cárceles y realicen fiestas. Propone una Fiscalía Antimafia especializada. Entiende el conflicto actual como crimen organizado, no como conflicto político, lo que cambia el enfoque de la negociación.", "pro": "Su diagnóstico de que el conflicto actual es de crimen organizado, no político, tiene respaldo en análisis de seguridad especializados.", "con": "Su posición intermedia entre continuar y romper diálogos puede generar indefinición en política de paz. Bajo respaldo electoral (3,6%) limita su capacidad de implementar esta agenda."}, "4": {"p": "Sin propuesta de paz estructurada publicada y verificada a la fecha.", "pro": "N/A — sin propuestas verificadas.", "con": "Ausencia de propuesta de paz en país con conflicto armado activo en múltiples regiones."}, "5": {"p": "Promete ataques aéreos contra el ELN con apoyo estadounidense desde el primer día de gobierno, según International Crisis Group (marzo 2026). Romper todos los diálogos con grupos armados. Retomar fumigación con glifosato. Inspirado en el modelo Bukele de El Salvador. Reactivar todas las órdenes de captura de voceros de la paz total el día de posesión.", "pro": "El modelo Bukele en El Salvador logró reducción significativa de violencia letal a corto plazo, aunque con cuestionamientos a derechos humanos.", "con": "International Crisis Group advierte que ataques aéreos contra el ELN podrían escalar el conflicto. El modelo Bukele fue posible por condiciones institucionales muy diferentes a las colombianas."}, "6": {"p": "Posición pragmática: apoya negociaciones con grupos armados que demuestren voluntad real de paz, pero sin concesiones sin resultados. Sin propuesta de paz estructurada publicada más allá de declaraciones generales.", "pro": "Posición pragmática evita los extremos de continuar diálogos sin resultados o escalar el conflicto militarmente.", "con": "Sin propuesta detallada sobre cómo manejaría el conflicto armado. Fue exministro del gobierno Petro durante parte de la implementación de la paz total."}, "7": {"p": "Rechazo frontal a la paz total. Retorno al control territorial con Fuerzas Armadas. Órdenes de captura activas para jefes armados. Su historia personal como víctima del conflicto (hijo del senador Miguel Uribe Turbay y viudo de Diana Turbay, ambos víctimas) marca profundamente su postura.", "pro": "Su narrativa de víctima del conflicto le da credibilidad moral y compromiso genuino con la seguridad.", "con": "Sin propuesta de paz estructurada más allá del rechazo a la paz total. El retorno exclusivo a la vía militar no ha logrado paz duradera históricamente en Colombia."}, "8": {"p": "Reforma del sistema penal y endurecimiento de penas. Ciberseguridad como herramienta contra grupos criminales. Sin propuesta de paz negociada verificada.", "pro": "N/A — sin propuesta de paz negociada verificada.", "con": "Ausencia de propuesta de paz estructurada en candidata con enfoque principalmente punitivo."}, "9": {"p": "Implementación total del Acuerdo de Paz con las FARC como hoja de ruta. Justicia transicional robusta. Énfasis en reforma rural integral como condición estructural de la paz. Su partido 'La Fuerza de la Paz' hace de este tema su eje central. Su fórmula Martha Lucía Zamora fue asesora de la Jurisdicción Especial para la Paz.", "pro": "Fórmula vicepresidencial con experiencia directa en la JEP es un activo real para implementar el Acuerdo. El Acuerdo de Paz tiene reconocimiento y respaldo internacional.", "con": "El Acuerdo de Paz lleva 10 años con implementación parcial. 0,1% en encuestas limita drásticamente su capacidad de ejecutar esta agenda."}, "10": {"p": "Paz desde la presencia estatal en territorios abandonados. Su experiencia como gobernador del Magdalena le dio perspectiva sobre el conflicto en regiones costeras. Sin propuesta de paz negociada estructurada publicada.", "pro": "La presencia estatal en territorios abandonados es reconocida por expertos como condición necesaria (no suficiente) para la paz.", "con": "Sin propuesta de paz negociada propia verificada. El conflicto en el Caribe tiene dinámicas específicas que van más allá de su experiencia territorial."}, "11": {"p": "Rechazo total a la paz total. Sometimiento de grupos armados mediante fuerza militar. Como exjefe del Estado Mayor Conjunto tiene formación en doctrina militar de seguridad. Propone una estrategia de sometimiento sin negociación.", "pro": "Conocimiento profundo de las capacidades y limitaciones de las Fuerzas Armadas colombianas.", "con": "La vía exclusivamente militar no ha logrado paz duradera en Colombia en más de 60 años de conflicto. El Partido Ecologista que lo avala contrasta con una postura de fuerza militar pura."}, "12": {"p": "Reactivar todas las órdenes de captura de 'voceros de la paz total' el día de posesión (declaración verificada, El Tiempo, mayo 2026). Alinearse con la política antidrogas de Trump y mayor coordinación con Washington (International Crisis Group, marzo 2026). No continuar con diálogos que no tengan resultados. Fajardo coincide en que 'el 7 de agosto se acaba el proyecto de la paz total'.", "pro": "Posición clara y predecible que genera certidumbre institucional. La alineación con Trump puede generar apoyos internacionales en materia de lucha contra el narcotráfico.", "con": "Reactivar órdenes de captura puede escalar el conflicto armado en territorios vulnerables. International Crisis Group advierte sobre los riesgos de un giro abrupto en la política de paz."}, "13": {"p": "Fajardo aseguró en el debate de Antioquia (7 mayo 2026) que 'el 7 de agosto se acaba el proyecto de la paz total'. Propone que las fuerzas armadas pasen a la ofensiva (International Crisis Group, marzo 2026), aunque con un enfoque que evita los extremos. Sin propuesta de diálogos activos con grupos armados verificada.", "pro": "Su posición intermedia evita la polarización entre paz total y guerra total.", "con": "International Crisis Group lo incluye entre los candidatos que insisten en que las fuerzas armadas deben pasar a la ofensiva, lo que puede escalar el conflicto. Sin propuesta de paz negociada verificada."}};
+const TOPICS = ["seg","eco","sal","edu","amb","ins","cam","gen","jov","paz"];
+const TOPIC_LABELS = {seg:"Seguridad",eco:"Economía",sal:"Salud",edu:"Educación",amb:"Energía",ins:"Institucional",cam:"Campo",gen:"Género y Mujeres",jov:"Jóvenes",paz:"Paz y Conflicto"};
+
+const C = [
+  {num:"1",name:"Iván Cepeda",party:"Pacto Histórico",ideo:"izq",badge:"badge-left",badgeTxt:"Izquierda",pct:"44,3%",
+   color:"#00FFD1",accent:"linear-gradient(90deg,#00FFD1,#00B89C)",
+   photo:"https://apicongresovisible.uniandes.edu.co/uploads/persona/2395/figura-Ivan%20Cepeda-510px.jpg",
+   photoSrc:"Foto: Congreso Visible – Uniandes",
+   str:88,strColor:"#00FFD1",strLbl:"Fuerza territorial: Caribe, Pacífico, Bogotá",
+   p:{seg:"Continuar y profundizar la Paz Total. Enfoque de 'seguridad humana': presencia estatal civil en territorios violentos, no solo coerción. Garantías de verdad, justicia y reparación a víctimas.",
+      eco:"Reforma tributaria progresiva gravando grandes patrimonios y dividendos. Colombia como potencia agroalimentaria. Mayor protagonismo del Estado frente al modelo neoliberal.",
+      sal:"Retomar la reforma a la salud. Avanzar hacia sistema universal sin intermediación de EPS. Énfasis en atención preventiva y territorial.",
+      edu:"Educación superior pública gratuita y territorializada. Etnoeducación para comunidades afro e indígenas. Incentivos al empleo juvenil.",
+      amb:"Prohibir el fracking. Transición energética gradual. Agua y ambiente como derechos fundamentales. Protección de páramos y selvas.",
+      ins:"Posible Asamblea Constituyente como eje de transformación política. Defensa de DDHH y reparación integral a víctimas.",
+      cam:"Revolución agraria: redistribución de tierras, redes de acopio campesino, cuartos fríos y plantas de transformación administradas por juntas comunales."},
+   pro:{seg:"Propone solución estructural al conflicto, no solo respuesta policial.",eco:"Reforma tributaria progresiva con potencial redistributivo real.",sal:"Sistema universal sin intermediarios reduce barreras de acceso.",edu:"Gratuidad universitaria amplía cobertura para sectores excluidos.",amb:"Coherente con compromisos climáticos internacionales de Colombia.",ins:"Busca ampliar participación ciudadana en las decisiones del Estado.",cam:"Propuesta agraria más detallada y articulada de todos los candidatos."},
+   con:{seg:"Paz Total sin resultados verificables genera desconfianza ciudadana.",eco:"Reforma tributaria puede frenar inversión privada a corto plazo.",sal:"Eliminar EPS sin sistema alterno listo puede colapsar la atención.",edu:"Costo fiscal de gratuidad universal no está plenamente sustentado.",amb:"Prohibir exploración reduce ingresos fiscales sin alternativa inmediata.",ins:"Asamblea Constituyente genera inestabilidad jurídica e institucional.",cam:"Implementación requiere presupuesto y capacidad estatal que hoy no existe."}},
+
+  {num:"3",name:"Claudia López",party:"Con Claudia Imparables",ideo:"cen",badge:"badge-centro",badgeTxt:"Centro",pct:"3,6%",
+   color:"#38C4FF",accent:"linear-gradient(90deg,#38C4FF,#1890C0)",
+   photo:"https://bogota.gov.co/sites/default/files/styles/1050px/public/2022-03/claudia-lopez-forbes.jpeg",
+   photoSrc:"Foto: Alcaldía de Bogotá (bogota.gov.co)",
+   str:42,strColor:"#38C4FF",strLbl:"Fuerza territorial: Bogotá, Eje Cafetero",
+   p:{seg:"Fiscalía Antimafia especializada. Rechaza paz total sin cese criminal real. Seguridad urbana con enfoque en convivencia ciudadana.",eco:"Reducir burocracia estatal. Presupuestos participativos regionales. Gasto eficiente sin dependencia de Bogotá.",sal:"Sistema mixto de aseguramiento sin ánimo de lucro. Telemedicina y justicia regional en salud.",edu:"Énfasis en primera infancia y calidad docente. Conectividad digital en municipios alejados.",amb:"Transición energética acelerada. Duplicar capacidad solar y eólica para 2030. Expandir transporte masivo en 5 ciudades.",ins:"Contratación pública 100% digital con trazabilidad blockchain. Fiscalía Antimafia. Rechaza Constituyente.",cam:"Asociaciones municipales para descentralización efectiva. Presupuestos participativos regionales."},
+   pro:{seg:"Trayectoria anticorrupción sólida que le da credibilidad institucional.",eco:"Descentralización real reduce clientelismo y dependencia del centro.",sal:"Sistema mixto más viable políticamente que eliminar EPS de golpe.",edu:"Experiencia probada en Bogotá con educación articulada al sector productivo.",amb:"La propuesta de transición más ambiciosa del espectro con metas concretas.",ins:"Blockchain en contratación dificulta la corrupción técnicamente.",cam:"Presupuestos participativos empoderan comunidades locales."},
+   con:{seg:"Poca visibilidad en seguridad rural y zonas de conflicto activo.",eco:"Sin programa económico robusto más allá de eficiencia del gasto.",sal:"Financiación del sistema mixto no está detallada en su programa.",edu:"Propuesta nacional menos desarrollada que su gestión en Bogotá.",amb:"Transición acelerada sin plan de sustitución de ingresos petroleros.",ins:"3,6% en encuestas pese a amplia trayectoria reconocida.",cam:"Propuesta agraria menos desarrollada que su agenda urbana."}},
+
+  {num:"4",name:"Santiago Botero",party:"Romper el Sistema",ideo:"cen",badge:"badge-cd",badgeTxt:"Centro-derecha",pct:"1,4%",
+   color:"#FFD166",accent:"linear-gradient(90deg,#FFD166,#C0A030)",
+   photo:"https://imagenes.portafolio.co/files/og_thumbnail/uploads/2025/03/03/67c5ddb54be0c.jpeg",
+   photoSrc:"Foto: Portafolio (portafolio.co)",
+   str:18,strColor:"#FFD166",strLbl:"Fuerza territorial: Barranquilla, Costa Caribe",
+   p:{seg:"Seguridad desde el sentido común ciudadano. Perfil empresarial independiente, sin vínculos con partidos tradicionales.",eco:"Reducción de trámites y confianza en el sector privado. Emprendimiento como motor económico principal.",sal:"Sin propuestas estructuradas publicadas y verificadas a la fecha.",edu:"Sin propuestas estructuradas publicadas y verificadas a la fecha.",amb:"Sin posición pública detallada verificada.",ins:"Candidato antipolítica que propone romper con el sistema político tradicional.",cam:"Sin programa de desarrollo rural publicado y verificado."},
+   pro:{seg:"Perfil empresarial independiente sin vínculos con partidos en crisis.",eco:"Reducción de trámites tiene potencial de agilizar la actividad productiva.",sal:"N/A — sin propuestas verificadas.",edu:"N/A — sin propuestas verificadas.",amb:"N/A — sin propuestas verificadas.",ins:"Discurso antiestablishment atrae votantes desencantados con la política.",cam:"N/A — sin propuestas verificadas."},
+   con:{seg:"Vaguedad programática impide evaluar su propuesta de seguridad.",eco:"Sin detalles financieros ni programa económico estructurado.",sal:"Ausencia total de propuestas en salud en contexto de crisis sistémica.",edu:"Ausencia total de propuestas en educación.",amb:"Sin posición ambiental en contexto de crisis energética.",ins:"Sin experiencia en gestión pública que respalde sus propuestas.",cam:"No hay programa de desarrollo rural publicado."}},
+
+  {num:"5",name:"Abelardo de la Espriella",party:"Defensores de la Patria",ideo:"der",badge:"badge-der",badgeTxt:"Derecha",pct:"21,5%",
+   color:"#FF5F1F",accent:"linear-gradient(90deg,#FF5F1F,#C03000)",
+   photo:"https://colombiacheck.s3.us-east-2.amazonaws.com/colcheck/s3fs-public/2019-03/Perfil%20abelardo%20de%20la%20espriella.jpg",
+   photoSrc:"Foto: ColombiaCheck (colombiacheck.com)",
+   str:76,strColor:"#FF5F1F",strLbl:"Fuerza territorial: Antioquia, Eje Cafetero, Córdoba",
+   p:{seg:"Remasterización 2.0 de la Seguridad Democrática. Mano de hierro contra grupos armados. Retomar fumigación con glifosato. Romper diálogos sin resultados.",eco:"90 decretos desde el primer día. Eliminar entidades duplicadas. Reducir carga tributaria empresarial. Garantías de seguridad jurídica.",sal:"Reorganizar sistema sin eliminar EPS abruptamente. Mejorar acceso a medicamentos. Fortalecer red hospitalaria pública.",edu:"Formación técnica vinculada al aparato productivo. Créditos educativos y conectividad regional.",amb:"Reactivar exploración de petróleo y gas. Rechaza cierre de concesiones de combustibles fósiles.",ins:"Defender la Constitución del 91. Rechaza Asamblea Constituyente. Endurecer penas por corrupción. Registro digital en contratación.",cam:"Seguridad jurídica en el campo como condición previa para inversión privada rural."},
+   pro:{seg:"Mano firme es una demanda real de amplios sectores ciudadanos.",eco:"Reducción burocrática puede atraer inversión extranjera directa.",sal:"Reorganización gradual evita el colapso de la atención médica.",edu:"Educación técnica articulada con mercado laboral tiene alta demanda.",amb:"Mantener ingresos petroleros protege el gasto social a corto plazo.",ins:"Defensa de la Constitución genera estabilidad institucional.",cam:"Seguridad jurídica activa inversión rural privada."},
+   con:{seg:"Modelo de Seguridad Democrática tuvo altos costos en DDHH documentados.",eco:"90 decretos desde el día 1 pueden generar inestabilidad jurídica.",sal:"Sin detalles sobre financiación de la reorganización del sistema.",edu:"Subordina educación a lógica del mercado, descuidando formación integral.",amb:"Reactivar fósiles agudiza crisis climática y dependencia energética.",ins:"Mayor rechazo: 16,5% nunca votaría por él (Invamer abr 2026).",cam:"Enfoque privilegia grandes inversionistas sobre economía campesina."}},
+
+  {num:"6",name:"Mauricio Lizcano",party:"Firme con Lizcano Colombianismo",ideo:"cen",badge:"badge-centro",badgeTxt:"Centro",pct:"0,4%",
+   color:"#38C4FF",accent:"linear-gradient(90deg,#38C4FF,#1890C0)",
+   photo:"https://www.elpais.com.co/resizer/v2/YXU3YL5AMJBATHIIPV6IS7YPA4.jpg?auth=50c05dd21a84ab7eefb2734b3733153966b5eae3a63c86151302e822c2bd15df&smart=true&quality=75&width=1280&height=720",
+   photoSrc:"Foto: El País Cali (elpais.com.co)",
+   str:22,strColor:"#38C4FF",strLbl:"Fuerza territorial: Bogotá, sectores digitales",
+   p:{seg:"Inteligencia tecnológica y drones contra el crimen. Sentido común sin extremos ideológicos.",eco:"Economía digital y TIC como motores de desarrollo. Digitalización del Estado como palanca productiva.",sal:"Salud con enfoque tecnológico. Telemedicina y digitalización de historias clínicas.",edu:"Sin propuesta educativa estructurada y verificada publicada.",amb:"Sin posición ambiental detallada verificada.",ins:"Gobierno digital como herramienta anticorrupción. Automatización de procesos estatales.",cam:"Sin programa de desarrollo rural publicado."},
+   pro:{seg:"Tecnología aplicada a la seguridad es innovador y de alto impacto.",eco:"Exministro TIC con experiencia real en digitalización del Estado colombiano.",sal:"Telemedicina amplía cobertura en zonas remotas a bajo costo fiscal.",edu:"N/A.",amb:"N/A.",ins:"Gobierno digital reduce corrupción por trazabilidad de recursos.",cam:"N/A."},
+   con:{seg:"Vaguedad sobre manejo del conflicto armado más allá de tecnología.",eco:"Ser exministro de Petro es un lastre electoral en contexto opositor.",sal:"Digitalización sin reforma estructural no resuelve crisis del sistema.",edu:"Ausencia de propuesta educativa en candidato con experiencia en TIC.",amb:"Sin posición frente a crisis energética nacional.",ins:"0,4% en encuestas pese a perfil ejecutivo reconocido.",cam:"No hay programa rural verificable publicado."}},
+
+  {num:"7",name:"Miguel Uribe Londoño",party:"Partido Demócrata Colombiano",ideo:"der",badge:"badge-der",badgeTxt:"Derecha",pct:"0,4%",
+   color:"#FF3CAC",accent:"linear-gradient(90deg,#FF3CAC,#C02080)",
+   photo:"https://www.centrodemocratico.com/wp-content/uploads/2025/09/Miguel_Uribe_Londono-1.jpg",
+   photoSrc:"Foto: Centro Democrático (centrodemocratico.com)",
+   str:20,strColor:"#FF3CAC",strLbl:"Fuerza territorial: Bogotá, sectores conservadores",
+   p:{seg:"Rechazo frontal a la paz total. Retorno al control territorial con Fuerzas Armadas. Órdenes de captura activas para jefes armados.",eco:"Reactivación de inversión privada con seguridad jurídica. Rechaza reformas tributarias del gobierno Petro.",sal:"Sin propuesta estructurada publicada.",edu:"Sin propuesta estructurada publicada.",amb:"Sin posición ambiental verificada.",ins:"Defensa del Estado de derecho. Postura firme contra la impunidad.",cam:"Sin programa agrario publicado."},
+   pro:{seg:"Narrativa de víctima del conflicto le da credibilidad moral en seguridad.",eco:"Seguridad jurídica es una demanda legítima del sector empresarial.",sal:"N/A.",edu:"N/A.",amb:"N/A.",ins:"Trayectoria familiar le da peso simbólico en debate sobre impunidad.",cam:"N/A."},
+   con:{seg:"Sin propuesta de paz estructurada más allá del rechazo a la paz total.",eco:"Sin programa económico detallado ni propuestas verificables.",sal:"Ausencia de propuesta en salud en contexto de crisis grave.",edu:"Sin programa educativo publicado.",amb:"Sin posición frente a crisis ambiental y energética.",ins:"Bajo respaldo (0,4%) limita su capacidad de influencia política.",cam:"No hay programa de desarrollo rural publicado."}},
+
+  {num:"8",name:"Sondra Macollins",party:"Partido Digital",ideo:"ind",badge:"badge-ind",badgeTxt:"Independiente",pct:"0,2%",
+   color:"#B44FFF",accent:"linear-gradient(90deg,#B44FFF,#7C2FD0)",
+   photo:"https://imagenes2.eltiempo.com/files/image_600_455/uploads/2025/12/22/69496c71a0935.jpeg",
+   photoSrc:"Foto: El Tiempo (eltiempo.com)",
+   str:12,strColor:"#B44FFF",strLbl:"Fuerza territorial: diáspora colombiana, Santa Marta",
+   p:{seg:"Mano dura y endurecimiento penal. Brigadas de mujeres. C5 de ciberseguridad: red integrada de ~5.800 cámaras de vigilancia.",eco:"Eliminar 32 gobernaciones y descentralizar recursos directamente a municipios.",sal:"Sin propuesta estructurada publicada.",edu:"Sin propuesta estructurada publicada.",amb:"5 millones de hectáreas para cultivos de oleaginosas como alternativa legal a la coca.",ins:"Veeduría digital ciudadana en tiempo real. Reestructuración judicial completa.",cam:"Programa de cultivos de oleaginosas para sustituir coca en zonas rurales."},
+   pro:{seg:"C5 de ciberseguridad interconectada es propuesta técnica específica y concreta.",eco:"Eliminar gobernaciones podría reducir clientelismo territorial estructural.",sal:"N/A.",edu:"N/A.",amb:"Sustitución de cultivos ilegales por oleaginosas es propuesta novedosa.",ins:"Veeduría digital ciudadana en tiempo real es innovadora.",cam:"Alternativa productiva legal para zonas cocaleras es pertinente."},
+   con:{seg:"Mano dura sin contexto de paz ignora causas estructurales de la violencia.",eco:"Eliminar 32 gobernaciones requiere reforma constitucional imposible en un período.",sal:"Ausencia de propuesta en salud en contexto de crisis grave.",edu:"Sin programa educativo en candidata con 1,1 millones de firmas.",amb:"Propuesta de oleaginosas sin detalles sobre financiación ni implementación.",ins:"0,2% en encuestas pese a 1,1 millones de firmas recolectadas.",cam:"Sin programa rural integral más allá de la sustitución de cultivos."}},
+
+  {num:"9",name:"Roy Barreras",party:"La Fuerza de la Paz",ideo:"izq",badge:"badge-cl",badgeTxt:"Centro-izquierda",pct:"0,1%",
+   color:"#00FFD1",accent:"linear-gradient(90deg,#00FFD1,#00A090)",
+   photo:"https://apicongresovisible.uniandes.edu.co/uploads/persona/112/figura-Roy%20Barreras-510px.jpg",
+   photoSrc:"Foto: Congreso Visible – Uniandes",
+   str:25,strColor:"#00FFD1",strLbl:"Fuerza territorial: Cali, Cauca, Bogotá",
+   p:{seg:"Implementación total del Acuerdo de Paz con FARC. Énfasis en reforma rural integral y justicia transicional.",eco:"Modernizar campo con tecnología, crédito rural y cadenas de exportación agrícola.",sal:"Sistema preventivo con centros de atención primaria en cada municipio. Telemedicina rural.",edu:"Educación pública fortalecida. Ciencia y tecnología para el desarrollo rural.",amb:"Desarrollo rural sostenible. Equilibrio entre producción agropecuaria y conservación.",ins:"Implementar el Acuerdo de Paz como hoja de ruta institucional. Defensa del equilibrio de poderes.",cam:"Implementar reforma rural integral: tierra para campesinos y crédito rural favorable."},
+   pro:{seg:"Implementar el Acuerdo tiene respaldo de organismos internacionales.",eco:"Desarrollo agroindustrial puede dinamizar economías regionales.",sal:"Atención primaria en municipios resuelve el problema de acceso más crítico.",edu:"Vínculo coherente entre educación y ciencia para el desarrollo rural.",amb:"Equilibrio producción-conservación más viable que posiciones extremas.",ins:"Experiencia como expresidente del Senado y exembajador le da conocimiento institucional.",cam:"Reforma rural del Acuerdo tiene marco jurídico ya existente."},
+   con:{seg:"Implementar el Acuerdo implica negociar con actores que han incumplido.",eco:"Sin detalles sobre cómo financiar la modernización del campo.",sal:"Propuesta general sin detalles sobre financiación ni plazos.",edu:"Sin propuesta educativa propia más allá del marco general.",amb:"Equilibrio propuesto puede no ser suficiente ante urgencia climática.",ins:"0,1% en encuestas indica pérdida de respaldo tras pasar por el gobierno Petro.",cam:"Marco del Acuerdo lleva 10 años sin implementarse plenamente."}},
+
+  {num:"10",name:"Carlos Caicedo",party:"Movimiento Caicedo",ideo:"izq",badge:"badge-cl",badgeTxt:"Centro-izquierda",pct:"0,4%",
+   color:"#00FFD1",accent:"linear-gradient(90deg,#00FFD1,#009980)",
+   photo:"https://cloudfront-us-east-1.images.arcpublishing.com/elespectador/BIL23FBLFVFUXPA4E7BSAELTLU.jpg",
+   photoSrc:"Foto: El Espectador (elespectador.com)",
+   str:30,strColor:"#00FFD1",strLbl:"Fuerza territorial: Magdalena, Costa Caribe",
+   p:{seg:"Presencia estatal en territorios históricamente abandonados. Seguridad desde el fortalecimiento del Estado regional.",eco:"Desarrollo económico desde las regiones. Caribe colombiano como motor productivo nacional.",sal:"Sin propuesta estructurada publicada.",edu:"Experiencia como rector universitario aplicada a política educativa regional.",amb:"Sin posición ambiental verificada.",ins:"Descentralización efectiva del poder político hacia las regiones.",cam:"Inversión en territorios costeros y marginados como base del desarrollo."},
+   pro:{seg:"Experiencia real como gobernador y alcalde con altos índices de ejecución.",eco:"Enfoque regional pertinente dado el centralismo histórico de Colombia.",sal:"N/A.",edu:"Experiencia probada como rector universitario en el Magdalena.",amb:"N/A.",ins:"Trayectoria ejecutiva territorial le da credibilidad en gestión pública.",cam:"Conocimiento real de las necesidades del Caribe colombiano."},
+   con:{seg:"Sin propuesta de seguridad nacional más allá del ámbito regional.",eco:"Enfoque regional puede descuidar la política económica nacional.",sal:"Ausencia de propuesta en salud en contexto de crisis sistémica.",edu:"Sin programa educativo de alcance nacional publicado.",amb:"Sin posición frente a crisis energética y transición ambiental.",ins:"0,4% en encuestas sugiere que su base regional no se traslada al nivel nacional.",cam:"Sin programa agrario de alcance nacional publicado."}},
+
+  {num:"11",name:"Gustavo Matamoros",party:"Partido Ecologista Colombiano",ideo:"der",badge:"badge-der",badgeTxt:"Derecha",pct:"0,2%",
+   color:"#FF5F1F",accent:"linear-gradient(90deg,#FF5F1F,#A03000)",
+   photo:"https://elfrente.com.co/content/images/2025/09/MATAMOROS.jpg",
+   photoSrc:"Foto: El Frente (elfrente.com.co)",
+   str:15,strColor:"#FF5F1F",strLbl:"Fuerza territorial: sectores militares y conservadores",
+   p:{seg:"Recuperar control territorial con Fuerzas Armadas. Rechazo total a la paz total. Doctrina militar de sometimiento de grupos armados.",eco:"Sin propuesta económica estructurada publicada.",sal:"Sin propuesta estructurada publicada.",edu:"Sin propuesta estructurada publicada.",amb:"Paradoja: aval del Partido Ecologista pero sin propuesta ambiental verificada.",ins:"Disciplina institucional basada en doctrina militar y cadena de mando.",cam:"Sin programa de desarrollo rural publicado."},
+   pro:{seg:"General retirado con más de 40 años de experiencia en seguridad nacional.",eco:"N/A.",sal:"N/A.",edu:"N/A.",amb:"N/A.",ins:"Conocimiento profundo de las instituciones del Estado desde adentro.",cam:"N/A."},
+   con:{seg:"Enfoque exclusivamente militarista ignora causas estructurales de la violencia.",eco:"Total ausencia de propuesta económica verificable.",sal:"Total ausencia de propuesta en salud.",edu:"Total ausencia de propuesta educativa.",amb:"Paradoja grave: partido ecologista sin agenda ambiental verificable.",ins:"Perfil militar puede generar desconfianza en amplios sectores civiles.",cam:"No hay programa de desarrollo rural publicado."}},
+
+  {num:"12",name:"Paloma Valencia",party:"Centro Democrático",ideo:"der",badge:"badge-der",badgeTxt:"Derecha",pct:"19,8%",
+   color:"#FF3CAC",accent:"linear-gradient(90deg,#FF3CAC,#B00070)",
+   photo:"https://apicongresovisible.uniandes.edu.co/uploads/persona/9535/figura-Paloma%20Valencia-510px.jpg",
+   photoSrc:"Foto: Congreso Visible – Uniandes",
+   str:72,strColor:"#FF3CAC",strLbl:"Fuerza territorial: Antioquia, Eje Cafetero, Bogotá",
+   p:{seg:"60.000 nuevos policías. Drones y ciberinteligencia. Reactivar órdenes de captura de paz total el día de posesión. Sustitución forzosa de cultivos.",eco:"Plan 'Colombia Más Grande' (111 propuestas): eliminar impuesto al patrimonio, reducir renta empresarial, zonas francas regionales, TLC con Asia.",sal:"Inyectar $9 billones: $3 bil para medicamentos y $6 bil para saldar deudas. Ajustar UPC según necesidades reales.",edu:"Programa nacional de inglés desde preescolar. Alianzas con universidades internacionales.",amb:"Reactivar exploración de combustibles fósiles en paralelo con energías limpias.",ins:"IA para auditorías públicas. Blockchain en contratación. Convertir Cancillería en Ministerio de Comercio Exterior.",cam:"Seguridad como condición previa al desarrollo rural. Vivienda y agua potable en zonas rurales."},
+   pro:{seg:"Propuesta de seguridad más detallada con metas cuantificables (60.000 policías).",eco:"Plan de 111 propuestas con metas verificables y fórmula técnica (Juan Daniel Oviedo, ex-DANE).",sal:"$9 billones para salud: el compromiso financiero más concreto de todos los candidatos.",edu:"Bilingüismo desde preescolar impacta competitividad a largo plazo.",amb:"Gradualismo protege ingresos fiscales durante la transición energética.",ins:"IA y blockchain en contratación reducen corrupción con herramientas probadas.",cam:"Vincula seguridad y desarrollo territorial como política integrada."},
+   con:{seg:"Reactivar órdenes de captura puede reescalar el conflicto armado.",eco:"Eliminar impuesto al patrimonio reduce ingresos del Estado para gasto social.",sal:"$9 billones requieren fuente clara: recorte al Ministerio de Igualdad no alcanza.",edu:"Bilingüismo costoso sin plan de formación docente suficiente.",amb:"Reactivar fósiles profundiza dependencia y posterga la transición necesaria.",ins:"Encuestas muestran crecimiento sostenido pero sigue tercera con 19,8%.",cam:"Seguridad como condición previa puede postergar el desarrollo rural indefinidamente."}},
+
+  {num:"13",name:"Sergio Fajardo",party:"Dignidad y Compromiso",ideo:"cen",badge:"badge-centro",badgeTxt:"Centro",pct:"2,5%",
+   color:"#38C4FF",accent:"linear-gradient(90deg,#38C4FF,#1060A0)",
+   photo:"https://static01.nyt.com/images/2018/02/15/universal/FAJARDOESPANOL140/FAJARDOESPANOL140-superJumbo.jpg",
+   photoSrc:"Foto: The New York Times (nytimes.com)",
+   str:38,strColor:"#38C4FF",strLbl:"Fuerza territorial: Antioquia, Bogotá, centros urbanos",
+   p:{seg:"Liderazgo directo de las Fuerzas Armadas. Seguridad desde educación y reducción de desigualdades como factores estructurales.",eco:"Economía naranja e industrias creativas. Capital semilla estatal para emprendimiento. Infraestructura con rigor técnico.",sal:"Reorganizar sistema con manejo eficiente de los recursos. Propuso línea especial del FMI para financiación.",edu:"Triplicar inversión en educación pública. Parques educativos y mega-bibliotecas en municipios vulnerables.",amb:"Transición energética responsable con participación regional. Renovables en territorios apartados.",ins:"Agencia anticorrupción independiente con poder vinculante y protección a denunciantes.",cam:"Sin programa agrario nacional detallado publicado."},
+   pro:{seg:"Aborda causas estructurales de la violencia, no solo la respuesta armada.",eco:"Economía naranja tiene potencial de crecimiento sin destruir sectores existentes.",sal:"Trayectoria de gestión eficiente en Medellín y Antioquia le da credibilidad.",edu:"Propuesta bandera con evidencia probada en Medellín y Antioquia.",amb:"Transición responsable con participación regional es más sostenible.",ins:"Agencia anticorrupción independiente con poder real: la más robusta del espectro.",cam:"N/A."},
+   con:{seg:"Propuesta general sin metas concretas en seguridad ciudadana.",eco:"Economía naranja no resuelve el problema del empleo informal masivo.",sal:"Propuesta de FMI para salud generó fuerte controversia en debates.",edu:"Fue candidato en 2018 y 2022 con la misma propuesta sin ganar.",amb:"Sin posición concreta sobre exploración de hidrocarburos.",ins:"2,5% en encuestas pese a ser el candidato más conocido del centro.",cam:"Ausencia de programa rural es debilidad en país con conflicto agrario histórico."}}
+];
+
+// state
+let curTopic = "seg";
+let curIdeo = "all";
+let compareList = [];
+let searchVal = "";
+
+// BUILD POLLS
+function buildPolls(){
+  const g = document.getElementById("poll-grid");
+  g.innerHTML = "";
+  POLLS.forEach(p=>{
+    const d = document.createElement("div");
+    d.className = "pc";
+    d.style.setProperty("--accent-color", p.color);
+    d.innerHTML = `<div style="position:absolute;top:0;left:0;right:0;height:3px;background:${p.color};border-radius:3px 3px 0 0"></div>
+      <div class="pc-nm" style="color:${p.color}">${p.name}</div>
+      <div class="pc-py">${p.party}</div>
+      <div class="pc-pct" style="color:${p.color}">${p.pct.toFixed(1)}%</div>
+      <div class="pc-track"><div class="pc-fill" style="width:0%;background:${p.color}" data-w="${(p.pct/44.3*100).toFixed(1)}"></div></div>
+      ${p.label ? `<div class="pc-label">${p.label}</div>` : ""}`;
+    g.appendChild(d);
+  });
+  setTimeout(()=>{
+    document.querySelectorAll(".pc-fill").forEach(el=>{
+      el.style.width = el.dataset.w + "%";
+    });
+  }, 200);
+}
+
+// BUILD CARD
+function buildCard(c){
+  const card = document.createElement("div");
+  card.className = "card";
+  card.dataset.num = c.num;
+  card.dataset.ideo = c.ideo === "ind" ? "cen" : c.ideo;
+  card.dataset.name = c.name.toLowerCase();
+  card.style.setProperty("--card-color", c.color);
+
+  const initials = c.name.split(" ").slice(0,2).map(w=>w[0]).join("");
+
+  card.innerHTML = `
+    <div class="card-accent" style="background:${c.accent}"></div>
+    <div class="ch">
+      <div class="photo-wrap">
+        <img class="photo" src="${c.photo}" alt="${c.name}"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="photo-fb" style="display:none;background:rgba(255,255,255,0.06);color:${c.color}">${initials}</div>
+        <span class="num-badge">#${c.num}</span>
+      </div>
+      <div class="cm">
+        <div class="cname">${c.name}</div>
+        <div class="cparty">${c.party}</div>
+        <div class="badges">
+          <span class="badge ${c.badge}">${c.badgeTxt}</span>
+          <span class="badge badge-pct">${c.pct} enc.</span>
+        </div>
+        <div class="pct-num" style="color:${c.color}">${c.pct}</div>
+      </div>
+    </div>
+    <div class="terr">
+      <span class="terr-lbl">${c.strLbl}</span>
+      <div class="terr-bar"><div class="terr-fill" style="width:${c.str}%;background:${c.strColor}"></div></div>
+    </div>
+    <div class="ctabs">
+      ${TOPICS.map(t=>`<button class="ctab ${t===curTopic?'on':''}" data-t="${t}" onclick="switchTab(this,'${c.num}')">${TOPIC_LABELS[t]}</button>`).join("")}
+    </div>
+    <div class="cb" id="cb-${c.num}">
+      ${renderBody(c, curTopic)}
+    </div>
+  `;
+
+  card.addEventListener("click", e=>{
+    if(e.target.classList.contains("ctab")) return;
+    if(e.target.classList.contains("cmp-toggle")) return;
+    toggleCompare(c.num, c.name);
+  });
+
+  return card;
+}
+
+function renderBody(c, t){
+  const extras = {gen: GEN, jov: JOV, paz: PAZ};
+  const extraKeys = Object.keys(extras);
+  let prop, pro, con;
+  if(extraKeys.includes(t)){
+    const src = extras[t][c.num];
+    prop = src ? src.p   : "Sin propuestas verificadas publicadas a la fecha.";
+    pro  = src ? src.pro : "N/A.";
+    con  = src ? src.con : "Sin información verificada.";
+  } else {
+    prop = c.p[t]; pro = c.pro[t]; con = c.con[t];
+  }
+  return `
+    <div class="prop-lbl">Propuesta · ${TOPIC_LABELS[t]}</div>
+    <div class="prop-txt">${prop}</div>
+    <div class="pc-grid">
+      <div class="pcb pro">
+        <div class="pclbl pclbl-p">✓ A favor</div>
+        <div class="pctxt pctxt-p">${pro}</div>
+      </div>
+      <div class="pcb con">
+        <div class="pclbl pclbl-c">✗ En contra</div>
+        <div class="pctxt pctxt-c">${con}</div>
+      </div>
+    </div>
+    <div class="photo-src">${c.photoSrc}</div>
+  `;
+}
+
+function switchTab(btn, num){
+  const card = document.querySelector(`.card[data-num="${num}"]`);
+  card.querySelectorAll(".ctab").forEach(b=>b.classList.remove("on"));
+  btn.classList.add("on");
+  const t = btn.dataset.t;
+  const c = C.find(x=>x.num===num);
+  document.getElementById("cb-"+num).innerHTML = renderBody(c, t);
+}
+
+function buildGrid(){
+  const g = document.getElementById("main-grid");
+  g.innerHTML = "";
+  C.forEach(c=>{
+    const card = buildCard(c);
+    g.appendChild(card);
+  });
+  applyFilters();
+}
+
+function applyFilters(){
+  let count = 0;
+  C.forEach(c=>{
+    const card = document.querySelector(`.card[data-num="${c.num}"]`);
+    if(!card) return;
+    const matchIdeo = curIdeo==="all" || card.dataset.ideo===curIdeo;
+    const matchSearch = c.name.toLowerCase().includes(searchVal) || c.party.toLowerCase().includes(searchVal);
+    if(matchIdeo && matchSearch){
+      card.classList.remove("hidden");
+      count++;
+    } else {
+      card.classList.add("hidden");
+    }
+  });
+  document.getElementById("cnt").textContent = count+" candidato"+(count!==1?"s":"");
+}
+
+function setTopic(btn){
+  document.querySelectorAll(".pill[data-topic]").forEach(p=>p.classList.remove("on-t"));
+  btn.classList.add("on-t");
+  curTopic = btn.dataset.topic;
+  // update all card tabs
+  C.forEach(c=>{
+    const card = document.querySelector(`.card[data-num="${c.num}"]`);
+    if(!card) return;
+    card.querySelectorAll(".ctab").forEach(b=>{
+      b.classList.toggle("on", b.dataset.t===curTopic);
+    });
+    const cb = document.getElementById("cb-"+c.num);
+    if(cb) cb.innerHTML = renderBody(c, curTopic);
+  });
+}
+
+function setIdeo(btn){
+  document.querySelectorAll(".pill[data-ideo]").forEach(p=>p.classList.remove("on-i"));
+  btn.classList.add("on-i");
+  curIdeo = btn.dataset.ideo;
+  applyFilters();
+}
+
+function filterSearch(val){
+  searchVal = val.toLowerCase();
+  applyFilters();
+}
+
+// COMPARE
+function toggleCompare(num, name){
+  if(compareList.find(x=>x.num===num)){
+    compareList = compareList.filter(x=>x.num!==num);
+    document.querySelector(`.card[data-num="${num}"]`).classList.remove("selected");
+  } else {
+    if(compareList.length >= 2){
+      const removed = compareList.shift();
+      document.querySelector(`.card[data-num="${removed.num}"]`).classList.remove("selected");
+    }
+    compareList.push({num,name});
+    document.querySelector(`.card[data-num="${num}"]`).classList.add("selected");
+  }
+  updateCompareBar();
+}
+
+function updateCompareBar(){
+  const bar = document.getElementById("cmpbar");
+  const btn = document.getElementById("cmp-btn");
+  const s0 = document.getElementById("slot0");
+  const s1 = document.getElementById("slot1");
+  s0.textContent = compareList[0]?.name || "Candidato 1";
+  s0.className = "cmp-slot" + (compareList[0] ? " full" : "");
+  s1.textContent = compareList[1]?.name || "Candidato 2";
+  s1.className = "cmp-slot" + (compareList[1] ? " full" : "");
+  btn.disabled = compareList.length < 2;
+  bar.classList.toggle("vis", compareList.length > 0);
+}
+
+function clearCompare(){
+  compareList.forEach(x=>{
+    document.querySelector(`.card[data-num="${x.num}"]`)?.classList.remove("selected");
+  });
+  compareList = [];
+  updateCompareBar();
+}
+
+function openCompare(){
+  if(compareList.length < 2) return;
+  const ca = C.find(x=>x.num===compareList[0].num);
+  const cb2 = C.find(x=>x.num===compareList[1].num);
+  const modal = document.getElementById("modal");
+  document.getElementById("modal-title").textContent = ca.name+" vs "+cb2.name;
+  const grid = document.getElementById("cmp-grid");
+  const extraMap = {gen:GEN, jov:JOV, paz:PAZ};
+  const extraKeys = Object.keys(extraMap);
+  grid.innerHTML = [ca,cb2].map(c=>{
+    const initials = c.name.split(" ").slice(0,2).map(w=>w[0]).join("");
+    return `<div class="cmp-col">
+      <div class="cmp-col-head">
+        <img class="cmp-col-photo" src="${c.photo}" alt="${c.name}"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="cmp-col-pfb" style="display:none;background:rgba(255,255,255,0.07);color:${c.color}">${initials}</div>
+        <div>
+          <div class="cmp-col-name" style="color:${c.color}">${c.name}</div>
+          <div class="cmp-col-party">${c.party} · ${c.pct} enc.</div>
+        </div>
+      </div>
+      ${TOPICS.map(t=>{
+        let tp, tpro, tcon;
+        if(extraKeys.includes(t)){
+          const src = extraMap[t][c.num];
+          tp   = src ? src.p   : "Sin propuestas verificadas publicadas a la fecha.";
+          tpro = src ? src.pro : "N/A.";
+          tcon = src ? src.con : "Sin información verificada.";
+        } else {
+          tp   = c.p[t]   || "Sin propuestas verificadas.";
+          tpro = c.pro[t] || "N/A.";
+          tcon = c.con[t] || "Sin información verificada.";
+        }
+        return `
+        <div class="cmp-section">
+          <div class="cmp-section-lbl">${TOPIC_LABELS[t]}</div>
+          <div class="cmp-section-txt">${tp}</div>
+          <div class="cmp-section-pro">✓ ${tpro}</div>
+          <div class="cmp-section-con">✗ ${tcon}</div>
+        </div>`;
+      }).join("")}
+    </div>`;
+  }).join("");
+  modal.classList.add("vis");
+  document.body.style.overflow="hidden";
+}
+
+function closeCompare(){
+  document.getElementById("modal").classList.remove("vis");
+  document.body.style.overflow="";
+}
+document.getElementById("modal").addEventListener("click",e=>{if(e.target===e.currentTarget)closeCompare()});
+
+// INIT
+buildPolls();
+buildGrid();
+
+// SPECTRUM MAP
+const SPECTRUM = [
+  {num:"1", name:"Cepeda", short:"IC", pct:44.3, color:"#00FFD1", x:12, y:50},
+  {num:"3", name:"C. López", short:"CL", pct:3.6, color:"#38C4FF", x:38, y:30},
+  {num:"4", name:"Botero", short:"SB", pct:1.4, color:"#38C4FF", x:55, y:70},
+  {num:"5", name:"De la Espriella", short:"AE", pct:21.5, color:"#FF5F1F", x:88, y:50},
+  {num:"6", name:"Lizcano", short:"ML", pct:0.4, color:"#38C4FF", x:45, y:80},
+  {num:"7", name:"M. Uribe", short:"MU", pct:0.4, color:"#FF5F1F", x:80, y:75},
+  {num:"8", name:"Macollins", short:"SM", pct:0.2, color:"#B44FFF", x:60, y:25},
+  {num:"9", name:"Barreras", short:"RB", pct:0.1, color:"#00FFD1", x:28, y:65},
+  {num:"10", name:"Caicedo", short:"CC", pct:0.4, color:"#00FFD1", x:22, y:80},
+  {num:"11", name:"Matamoros", short:"GM", pct:0.2, color:"#FF5F1F", x:93, y:75},
+  {num:"12", name:"P. Valencia", short:"PV", pct:19.8, color:"#FF3CAC", x:75, y:50},
+  {num:"13", name:"Fajardo", short:"SF", pct:2.5, color:"#38C4FF", x:42, y:40},
+];
+
+function buildSpectrum(){
+  const chart = document.getElementById("spectrum-chart");
+  if(!chart) return;
+  SPECTRUM.forEach(c=>{
+    const size = Math.max(28, Math.min(64, 28 + c.pct * 0.8));
+    const div = document.createElement("div");
+    div.className = "cand-bubble";
+    div.style.left = c.x + "%";
+    div.style.top = c.y + "%";
+    div.innerHTML = `
+      <div class="bubble-circle" style="width:${size}px;height:${size}px;background:${c.color}22;border-color:${c.color}55;color:${c.color}">
+        ${c.short}
+      </div>
+      <div class="bubble-label" style="border-color:${c.color}44;color:${c.color}">${c.name}<br>${c.pct}%</div>`;
+    chart.appendChild(div);
+  });
+}
+
+const RADAR_CANDS = ["1","5","12","13"];
+const RADAR_TOPICS = [
+  {key:"seg",lbl:"Seguridad"},{key:"eco",lbl:"Economía"},{key:"sal",lbl:"Salud"},
+  {key:"edu",lbl:"Educación"},{key:"amb",lbl:"Energía"},{key:"ins",lbl:"Institucional"},
+  {key:"cam",lbl:"Campo"},{key:"gen",lbl:"Género"},{key:"jov",lbl:"Jóvenes"},{key:"paz",lbl:"Paz"},
+];
+const COVERAGE = {
+  "1":  {seg:3,eco:3,sal:3,edu:3,amb:3,ins:3,cam:3,gen:3,jov:2,paz:3},
+  "5":  {seg:3,eco:3,sal:2,edu:3,amb:2,ins:3,cam:1,gen:0,jov:3,paz:3},
+  "12": {seg:3,eco:3,sal:3,edu:2,amb:2,ins:3,cam:2,gen:1,jov:2,paz:3},
+  "13": {seg:2,eco:2,sal:2,edu:3,amb:2,ins:3,cam:1,gen:2,jov:2,paz:2},
+};
+const CAND_META = {
+  "1":  {name:"Iván Cepeda",    color:"#00FFD1"},
+  "5":  {name:"De la Espriella",color:"#FF5F1F"},
+  "12": {name:"Paloma Valencia",color:"#FF3CAC"},
+  "13": {name:"Sergio Fajardo", color:"#38C4FF"},
+};
+const COV_LABELS = ["Ausente","Mínima","Parcial","Detallada"];
+
+function buildRadar(){
+  const g = document.getElementById("radar-grid");
+  if(!g) return;
+  RADAR_CANDS.forEach(num=>{
+    const meta = CAND_META[num];
+    const cov  = COVERAGE[num];
+    const card = document.createElement("div");
+    card.className = "radar-card";
+    card.style.borderTopColor = meta.color;
+    card.style.borderTopWidth = "3px";
+    card.innerHTML = `<div class="radar-name" style="color:${meta.color}">${meta.name}</div>
+      <div class="radar-bars">
+        ${RADAR_TOPICS.map(t=>`
+          <div class="rbar-row">
+            <div class="rbar-lbl">${t.lbl}</div>
+            <div class="rbar-track"><div class="rbar-fill" style="width:${(cov[t.key]/3*100).toFixed(0)}%;background:${meta.color}88"></div></div>
+            <div class="rbar-val" style="color:${meta.color}">${COV_LABELS[cov[t.key]]}</div>
+          </div>`).join("")}
+      </div>`;
+    g.appendChild(card);
+  });
+}
+
+buildSpectrum();
+buildRadar();
+
+</script>
+</body>
+</html>
